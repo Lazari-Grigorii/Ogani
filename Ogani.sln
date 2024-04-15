@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ogani.Web", "Ogani.Web\Ogani.Web.csproj", "{75F1C0CD-D017-43FB-974E-709EC965D2DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ogani.BusinessLogic", "Ogani.BusinessLogic\Ogani.BusinessLogic.csproj", "{C8AD8C0E-AA0F-43EB-84B2-F2E0C444C342}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ogani.Domain", "Ogani.Domain\Ogani.Domain.csproj", "{434F36D2-8DAB-4D9C-BAE7-0E80C234825F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ogani.Helpers", "Ogani.Helpers\Ogani.Helpers.csproj", "{11A36946-345E-41CE-92C7-DB839180A124}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75F1C0CD-D017-43FB-974E-709EC965D2DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75F1C0CD-D017-43FB-974E-709EC965D2DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75F1C0CD-D017-43FB-974E-709EC965D2DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75F1C0CD-D017-43FB-974E-709EC965D2DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8AD8C0E-AA0F-43EB-84B2-F2E0C444C342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8AD8C0E-AA0F-43EB-84B2-F2E0C444C342}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8AD8C0E-AA0F-43EB-84B2-F2E0C444C342}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8AD8C0E-AA0F-43EB-84B2-F2E0C444C342}.Release|Any CPU.Build.0 = Release|Any CPU
+		{434F36D2-8DAB-4D9C-BAE7-0E80C234825F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{434F36D2-8DAB-4D9C-BAE7-0E80C234825F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{434F36D2-8DAB-4D9C-BAE7-0E80C234825F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{434F36D2-8DAB-4D9C-BAE7-0E80C234825F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11A36946-345E-41CE-92C7-DB839180A124}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11A36946-345E-41CE-92C7-DB839180A124}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11A36946-345E-41CE-92C7-DB839180A124}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11A36946-345E-41CE-92C7-DB839180A124}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D9C7ECC-7E84-480C-AF08-7C97093B6EB9}
+	EndGlobalSection
+EndGlobal
