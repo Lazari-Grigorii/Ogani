@@ -14,8 +14,8 @@ namespace Ogani.Web.Controllers
         private readonly ISession _session;
         public LoginController()
         {
-            var bl = new BusinessLogic();
-            _session = bl.CreateSessionBL();  
+            var logicBL = new BusinessLogic.BusinessLogic();
+            _session = logicBL.GetSessionBL();  
         }
 
         // GET: Login
@@ -26,14 +26,14 @@ namespace Ogani.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(UserLogin login) 
+        public ActionResult Index(LoginData data) 
         {
             if (ModelState.IsValid)
             {
                 ULoginData data = new ULoginData
                 {
-                    CredentialCache = login.Credential,
-                    PasswordDeriveBytes = login.Password,
+                    Credential = login.Credential,
+                    Password = login.Password,
                     LoginIp = Request.UserHostAddress,
                     LoginDateTime = DateTime.Now
                 };
