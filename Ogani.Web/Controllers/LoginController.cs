@@ -5,7 +5,10 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
-using Ogani.BusinessLogic.Interfaces;  // Добавил, но не уверен
+using Ogani.BusinessLogic.Interfaces;
+using Ogani.Domain.Entities.GeneralResponse;
+using Ogani.Domain.Entities.User;
+using Ogani.Web.Models;  // Добавил, но не уверен
 
 namespace Ogani.Web.Controllers
 {
@@ -28,27 +31,18 @@ namespace Ogani.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(LoginData data) 
         {
-            if (ModelState.IsValid)
+            var ULData = new ULoginData
             {
-                ULoginData data = new ULoginData
-                {
-                    Credential = login.Credential,
-                    Password = login.Password,
-                    LoginIp = Request.UserHostAddress,
-                    LoginDateTime = DateTime.Now
-                };
+                Credential = data.Username,
+                Password = data.Password,
+                UserIp = "",
+                FirstLoginTime = DateTime.Now
+            };
 
-                var userLogin = _session.UserLogin(data);
-                if (userLogin.Status)
-                {
-                    //ADD COOKIE
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ModelState.AddModelError("", userLogin.StatusMsg);
-                    return View();
-                }
+            RequestResponseData response = _session.UserLoginAction(ULData);
+            if (response != null && response.Status) 
+            {
+                //тут будет логика Cookie Generation
             }
 
             return View();
