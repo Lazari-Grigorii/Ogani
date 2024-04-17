@@ -185,6 +185,7 @@
     <Content Include="Vendors\css\jquery-ui.min.css" />
     <Content Include="Vendors\css\nice-select.css" />
     <Content Include="Vendors\css\owl.carousel.min.css" />
+    <Content Include="Vendors\css\Registration.css" />
     <Content Include="Vendors\css\slicknav.min.css" />
     <Content Include="Vendors\css\style.css" />
     <Content Include="Vendors\fonts\ElegantIcons.svg" />
@@ -262,6 +263,7 @@
     <Content Include="Vendors\js\main.js" />
     <Content Include="Vendors\js\mixitup.min.js" />
     <Content Include="Vendors\js\owl.carousel.min.js" />
+    <Content Include="Vendors\js\Registration.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -347,6 +349,8 @@
     <Content Include="Views\Home\Blog_Details.cshtml" />
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Shared\Registration.cshtml" />
+    <Content Include="Views\Home\Reg_page.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

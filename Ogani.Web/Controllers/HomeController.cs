@@ -48,5 +48,9 @@ namespace Ogani.Web.Controllers
         {
             return View();
         }
+        public ActionResult Reg_page()
+        {
+            return View();
+        }
     }
 }
