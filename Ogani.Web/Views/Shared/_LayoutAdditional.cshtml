@@ -21,6 +21,7 @@
     @Styles.Render("~/bundles/jquery/css")
     @Styles.Render("~/bundles/owl.carousel/css")
     @Styles.Render("~/bundles/slicknav/css")
+    @Styles.Render("~/bundles/reg/css")
 
     <!--ПРОСТО НАДО-->
     @if (IsSectionDefined("Styles"))
@@ -43,15 +44,11 @@
         @Html.Partial("_Humberger")
     </div>
     <!-- Humberger End -->
-    
-    
     <!-- Header Section Begin -->
     <header class="header">
         @Html.Partial("_Header")
     </header>
     <!-- Header Section End -->
-    
-    
     <!-- Hero Section Begin -->
     <section class="hero hero-normal">
         @Html.Partial("_HeroNormal")
@@ -67,8 +64,6 @@
         @Html.Partial("_Footer")
     </footer>
     <!-- Footer Section End -->
-    
-    
     <!--Scripts-->
     @Scripts.Render("~/bundles/jquery-3.3.1/js")
     @Scripts.Render("~/bundles/bootstrap/js")
@@ -78,7 +73,7 @@
     @Scripts.Render("~/bundles/mixitup/js")
     @Scripts.Render("~/bundles/owl.carousel/js")
     @Scripts.Render("~/bundles/main/js")
-
+    @Scripts.Render("~/bundles/reg/js")
 
     @RenderSection("scripts", required: false)
 

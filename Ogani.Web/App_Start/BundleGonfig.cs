@@ -42,10 +42,14 @@ namespace Ogani.Web
             bundles.Add(new StyleBundle("~/bundles/slicknav/css").Include(
                 "~/Vendors/css/slicknav.min.css", new CssRewriteUrlTransform()));
 
-            
-            
-            
-            
+            //reg style
+            bundles.Add(new StyleBundle("~/bundles/reg/css").Include(
+                "~/Vendors/css/Registration.css", new CssRewriteUrlTransform()));
+
+
+
+
+
             //Bootstrap script
             bundles.Add(new ScriptBundle("~/bundles/bootstrap/js").Include(
                 "~/Vendors/js/bootstrap.min.js"));
@@ -77,6 +81,10 @@ namespace Ogani.Web
             //Main script
             bundles.Add(new ScriptBundle("~/bundles/main/js").Include(
                 "~/Vendors/js/main.js"));
+
+            //REg script
+            bundles.Add(new ScriptBundle("~/bundles/reg/js").Include(
+                "~/Vendors/js/Registration.js"));
         }
     }
 }
