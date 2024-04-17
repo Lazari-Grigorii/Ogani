@@ -1,7 +1,9 @@
 ﻿using Ogani.BusinessLogic.Core;
 using Ogani.BusinessLogic.Interfaces;
+using Ogani.Domain.Entities.AuthorizationEntity;
 using Ogani.Domain.Entities.GeneralResponse;
 using Ogani.Domain.Entities.User;
+using Ogani.Domain.Entities.User.DbModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,11 @@ namespace Ogani.BusinessLogic.MainBL
         public RequestResponseData UserLoginAction(ULoginData data)
         {
             return ULASessionCheck(data);
+        }
+
+        public UCookieData GenGookieAlgorithm(User dataUser)
+        {
+            return UCGenerationAlg(dataUser);
         }
     }
 }

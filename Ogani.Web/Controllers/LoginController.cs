@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 using Ogani.BusinessLogic.Interfaces;
+using Ogani.Domain.Entities.AuthorizationEntity;
 using Ogani.Domain.Entities.GeneralResponse;
 using Ogani.Domain.Entities.User;
 using Ogani.Web.Models;  // Добавил, но не уверен
@@ -43,6 +44,12 @@ namespace Ogani.Web.Controllers
             if (response != null && response.Status) 
             {
                 //тут будет логика Cookie Generation
+                UCookieData ckData = _session.GenGookieAlgorithm(response.CurrentUser);
+
+                if (ckData != null)
+                {
+                    //SET Cookie to user browser
+                }
             }
 
             return View();

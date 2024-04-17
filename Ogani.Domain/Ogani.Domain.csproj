@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Entities\AuthorizationEntity\UCookieData.cs" />
     <Compile Include="Entities\GeneralResponse\RequestResponseData.cs" />
+    <Compile Include="Entities\User\DbModel\User.cs" />
     <Compile Include="Entities\User\ULoginData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

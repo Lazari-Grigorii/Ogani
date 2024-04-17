@@ -8,6 +8,7 @@ namespace Ogani.Domain.Entities.AuthorizationEntity
 {
     public class UCookieData
     {
-        public int id {  get; set; }
+        public int MaxAge {  get; set; }
+        public string Cookie {  get; set; }
     }
 }

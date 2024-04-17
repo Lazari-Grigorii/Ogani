@@ -10,5 +10,6 @@ namespace Ogani.Domain.Entities.GeneralResponse
     {
         public bool Status { get; set; }
         public string ResponseMessage {  get; set; } 
+        public User.DbModel.User CurrentUser { get; set; }
     }
 }
