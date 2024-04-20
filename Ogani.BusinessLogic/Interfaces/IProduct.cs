@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ogani.Domain.Entities.Product;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,7 @@ namespace Ogani.BusinessLogic.Interfaces
 {
     public interface IProduct
     {
+        ProductsDataModel GetProductsToList();
+        ProductsDataModel GetSingleProduct(int id);
     }
 }

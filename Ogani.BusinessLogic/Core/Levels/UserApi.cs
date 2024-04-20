@@ -1,5 +1,7 @@
 ﻿using Ogani.Domain.Entities.AuthorizationEntity;
 using Ogani.Domain.Entities.GeneralResponse;
+using Ogani.Domain.Entities.Product;
+using Ogani.Domain.Entities.Product.DBModel;
 using Ogani.Domain.Entities.User;
 using Ogani.Domain.Entities.User.DbModel;
 using System;
@@ -13,6 +15,7 @@ namespace Ogani.BusinessLogic.Core
 {
     public class UserAPI
     {
+        //---------------------Auth
         internal RequestResponseData ULASessionCheck(ULoginData data)
         {
             //database connection
@@ -20,13 +23,13 @@ namespace Ogani.BusinessLogic.Core
             //
             //
 
-            return new RequestResponseData 
-            { 
-                Status = false, 
+            return new RequestResponseData
+            {
+                Status = false,
                 CurrentUser = new User
                 {
                     UserName = "Egor"
-                } 
+                }
             };
         }
         internal UCookieData UCGenerationAlg(User dataUser)
@@ -36,11 +39,29 @@ namespace Ogani.BusinessLogic.Core
             //
             //
 
-            return new UCookieData 
+            return new UCookieData
             {
-                MaxAge = 1710055385, 
-                Cookie = "MY Unique ID for this session" 
+                MaxAge = 1710055385,
+                Cookie = "MY Unique ID for this session"
             };
+        }
+
+        //--------------------Product
+        internal ProductsDataModel ProductActionGetToList()
+        {
+            //SELECT FROM DATABASE db.Product -> Products
+
+            var products = new List<Product>();
+
+            return new ProductsDataModel { Products = products };
+        }
+        internal ProductsDataModel ProductGetSingleAction(int id)
+        {
+            //SELECT FROM db.Product WHERE ID = id
+
+            var product = new Product();
+
+            return new ProductsDataModel { SingleProduct = product };
         }
     }
 }

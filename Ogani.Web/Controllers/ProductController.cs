@@ -1,5 +1,6 @@
 ﻿using Ogani.BusinessLogic;
 using Ogani.BusinessLogic.Interfaces;
+using Ogani.Domain.Entities.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,26 @@ namespace Ogani.Web.Controllers
         // GET: Product
         public ActionResult Index()
         {
+            ProductsDataModel products = _product.GetProductsToList();
 
-            return View();
+            var model = new
+            {
+                products
+            };
+
+            return View(model);
+        }
+
+        public ActionResult Details(int id)
+        {
+            ProductsDataModel singleProduct = _product.GetSingleProduct(id);
+
+            var model = new
+            {
+                singleProduct
+            };
+
+            return View(model);
         }
     }
 }
