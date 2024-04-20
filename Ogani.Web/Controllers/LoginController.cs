@@ -159,7 +159,7 @@ namespace RentShopVehicle.Controllers
                     Username = rModel.Username,
                     LoginIP = Request.UserHostAddress,
                     LastEntry = DateTime.Now,
-                };
+                 };
 
                 var resp = session.CreateUserAccount(rData);
                 if (!resp.Exist)
