@@ -14,5 +14,10 @@ namespace Ogani.BusinessLogic
         {
             return new SessionBL();
         }
+
+        public IProduct GetProductBL() 
+        {
+            return new ProductBL();
+        }
     }
 }
