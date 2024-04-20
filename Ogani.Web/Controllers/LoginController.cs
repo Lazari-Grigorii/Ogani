@@ -1,51 +1,176 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
-using Ogani.BusinessLogic.Interfaces;
-using Ogani.Domain.Entities.GeneralResponse;
-using Ogani.Domain.Entities.User;
-using Ogani.Web.Models;  // Добавил, но не уверен
+using Ogani.BusinessLogic;
+using Ogani.Web.Models;
+using RentShopVehicle.BusinessLogic.Interfaces;
+using RentShopVehicle.Domain.Entities.User;
+using RentShopVehicle.Models;
 
-namespace Ogani.Web.Controllers
+namespace RentShopVehicle.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
-        private readonly ISession _session;
+
         public LoginController()
         {
-            var logicBL = new BusinessLogic.BusinessLogic();
-            _session = logicBL.GetSessionBL();  
+            var tmp = new BusinessLogic.BusinessLogic();
         }
 
-        // GET: Login
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            UpdateSessionStatus();
+            if ((string)System.Web.HttpContext.Current.Session["SessionStatus"] != "valid")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult NewPassword()
+        {
+            UpdateSessionStatus();
+            if ((string)System.Web.HttpContext.Current.Session["SessionStatus"] != "valid")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangePasswordAction(LoginModel lModel)
+        {
+            UpdateSessionStatus();
+            if ((string)System.Web.HttpContext.Current.Session["SessionStatus"] != "valid")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var lData = new LoginData()
+            {
+                Password = lModel.Password,
+            };
+
+            var responce = session.PasswordVerification(lData);
+            if (responce)
+            {
+                return RedirectToAction("NewPassword", "Login");
+            }
+            else
+            {
+                return RedirectToAction("ChangePassword", "Login");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult NewPasswordAction(LoginModel lModel)
+        {
+            UpdateSessionStatus();
+            if ((string)System.Web.HttpContext.Current.Session["SessionStatus"] != "valid")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var lData = new LoginData()
+            {
+                Password = lModel.Password,
+            };
+
+            var responce = session.ChangePassword(lData);
+            if (responce)
+            {
+                CloseSession();
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                return RedirectToAction("ChangePassword", "Login");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            CloseSession();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult Registration()
         {
             return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Index(LoginData data) 
+        public ActionResult LoginAction(LoginModel lModel)
         {
-            var ULData = new ULoginData
+            if (ModelState.IsValid)
             {
-                Credential = data.Username,
-                Password = data.Password,
-                UserIp = "",
-                FirstLoginTime = DateTime.Now
-            };
+                var lData = new LoginData()
+                {
+                    Username = lModel.Username,
+                    Password = lModel.Password,
+                    Entry = DateTime.Now,
+                    LoginIP = Request.UserHostAddress,
+                };
 
-            RequestResponseData response = _session.UserLoginAction(ULData);
-            if (response != null && response.Status) 
-            {
-                //тут будет логика Cookie Generation
+                var authResp = session.CredentialsVerification(lData);
+                if (authResp.Exist)
+                {
+                    HttpCookie cookie = session.GenerateCookies(lModel.Username);
+                    ControllerContext.HttpContext.Response.Cookies.Add(cookie);
+                    UpdateSessionStatus();
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", authResp.ErrorMsg);
+                    return RedirectToAction("Login", "Login");
+                }
             }
+            return RedirectToAction("Login", "Login");
+        }
 
-            return View();
+        [HttpPost]
+        public ActionResult RegistrationAction(RegistrationModel rModel)
+        {
+            if (ModelState.IsValid)
+            {
+                if (rModel.Password1 != rModel.Password2)
+                {
+                    ModelState.AddModelError("", "Password was not typed correct the second time!");
+                    return RedirectToAction("Registration", "Login");
+                }
+
+                var rData = new RegistrationData()
+                {
+                    Email = rModel.Email,
+                    Password = rModel.Password1,
+                    Username = rModel.Username,
+                    LoginIP = Request.UserHostAddress,
+                    LastEntry = DateTime.Now,
+                };
+
+                var resp = session.CreateUserAccount(rData);
+                if (!resp.Exist)
+                {
+                    ModelState.AddModelError("", resp.ErrorMsg);
+                    return RedirectToAction("Registration", "Login");
+                }
+
+                return RedirectToAction("Login", "Login");
+            }
+            return RedirectToAction("Registration", "Login");
         }
     }
 }
