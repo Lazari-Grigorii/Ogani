@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Web;
 using System.Web.Mvc;
-using Ogani.BusinessLogic;
+using Ogani.BusinessLogic.Interfaces;
+using Ogani.Domain.Entities.User;
 using Ogani.Web.Models;
-using RentShopVehicle.BusinessLogic.Interfaces;
-using RentShopVehicle.Domain.Entities.User;
-using RentShopVehicle.Models;
 
-namespace RentShopVehicle.Controllers
+namespace Ogani.Web.Controllers
 {
     public class LoginController : BaseController
     {
+        private readonly ISession _session;
 
         public LoginController()
         {
-            var tmp = new BusinessLogic.BusinessLogic();
+            var businessLogic = new BusinessLogic.BusinessLogic();
+            _session = businessLogic.GetSessionBL();
         }
 
         [HttpGet]
@@ -48,7 +48,7 @@ namespace RentShopVehicle.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangePasswordAction(LoginModel lModel)
+        public ActionResult ChangePasswordAction(LoginModel model)
         {
             UpdateSessionStatus();
             if ((string)System.Web.HttpContext.Current.Session["SessionStatus"] != "valid")
@@ -56,13 +56,13 @@ namespace RentShopVehicle.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var lData = new LoginData()
+            var loginData = new LoginData()
             {
-                Password = lModel.Password,
+                Password = model.Password,
             };
 
-            var responce = session.PasswordVerification(lData);
-            if (responce)
+            var response = _session.PasswordVerification(loginData);
+            if (response)
             {
                 return RedirectToAction("NewPassword", "Login");
             }
@@ -73,7 +73,7 @@ namespace RentShopVehicle.Controllers
         }
 
         [HttpPost]
-        public ActionResult NewPasswordAction(LoginModel lModel)
+        public ActionResult NewPasswordAction(LoginModel model)
         {
             UpdateSessionStatus();
             if ((string)System.Web.HttpContext.Current.Session["SessionStatus"] != "valid")
@@ -81,13 +81,13 @@ namespace RentShopVehicle.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var lData = new LoginData()
+            var loginData = new LoginData()
             {
-                Password = lModel.Password,
+                Password = model.Password,
             };
 
-            var responce = session.ChangePassword(lData);
-            if (responce)
+            var response = _session.ChangePassword(loginData);
+            if (response)
             {
                 CloseSession();
                 return RedirectToAction("Login", "Login");
@@ -112,29 +112,29 @@ namespace RentShopVehicle.Controllers
         }
 
         [HttpPost]
-        public ActionResult LoginAction(LoginModel lModel)
+        public ActionResult LoginAction(LoginModel model)
         {
             if (ModelState.IsValid)
             {
-                var lData = new LoginData()
+                var loginData = new LoginData()
                 {
-                    Username = lModel.Username,
-                    Password = lModel.Password,
+                    Username = model.Username,
+                    Password = model.Password,
                     Entry = DateTime.Now,
                     LoginIP = Request.UserHostAddress,
                 };
 
-                var authResp = session.CredentialsVerification(lData);
-                if (authResp.Exist)
+                var authResponse = _session.CredentialsVerification(loginData);
+                if (authResponse.Exist)
                 {
-                    HttpCookie cookie = session.GenerateCookies(lModel.Username);
+                    HttpCookie cookie = _session.GenerateCookies(model.Username);
                     ControllerContext.HttpContext.Response.Cookies.Add(cookie);
                     UpdateSessionStatus();
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    ModelState.AddModelError("", authResp.ErrorMsg);
+                    ModelState.AddModelError("", authResponse.ErrorMsg);
                     return RedirectToAction("Login", "Login");
                 }
             }
@@ -142,35 +142,45 @@ namespace RentShopVehicle.Controllers
         }
 
         [HttpPost]
-        public ActionResult RegistrationAction(RegistrationModel rModel)
+        public ActionResult RegistrationAction(RegistrationModel model)
         {
             if (ModelState.IsValid)
             {
-                if (rModel.Password1 != rModel.Password2)
+                if (model.Password1 != model.Password2)
                 {
                     ModelState.AddModelError("", "Password was not typed correct the second time!");
                     return RedirectToAction("Registration", "Login");
                 }
 
-                var rData = new RegistrationData()
+                var registrationData = new RegistrationData()
                 {
-                    Email = rModel.Email,
-                    Password = rModel.Password1,
-                    Username = rModel.Username,
+                    Email = model.Email,
+                    Password = model.Password1,
+                    Username = model.Username,
                     LoginIP = Request.UserHostAddress,
                     LastEntry = DateTime.Now,
-                 };
+                };
 
-                var resp = session.CreateUserAccount(rData);
-                if (!resp.Exist)
+                var response = _session.CreateUserAccount(registrationData);
+                if (!response.Exist)
                 {
-                    ModelState.AddModelError("", resp.ErrorMsg);
+                    ModelState.AddModelError("", response.ErrorMsg);
                     return RedirectToAction("Registration", "Login");
                 }
 
                 return RedirectToAction("Login", "Login");
             }
             return RedirectToAction("Registration", "Login");
+        }
+
+        private void UpdateSessionStatus()
+        {
+            // Implementation of UpdateSessionStatus
+        }
+
+        private void CloseSession()
+        {
+            // Implementation of CloseSession
         }
     }
 }
