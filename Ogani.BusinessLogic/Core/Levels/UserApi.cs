@@ -1,9 +1,11 @@
-﻿using Ogani.Domain.Entities.AuthorizationEntity;
+﻿using Ogani.BusinessLogic.DBModel;
+using Ogani.Domain.Entities.AuthorizationEntity;
 using Ogani.Domain.Entities.GeneralResponse;
 using Ogani.Domain.Entities.Product;
 using Ogani.Domain.Entities.Product.DBModel;
 using Ogani.Domain.Entities.User;
 using Ogani.Domain.Entities.User.DbModel;
+using Ogani.Domain.Enums.UserRoles;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -45,6 +47,31 @@ namespace Ogani.BusinessLogic.Core
                 Cookie = "MY Unique ID for this session"
             };
         }
+
+        //--------------------Register
+        internal RequestResponseData URASessionCheck(URegisterData data)
+        {
+            var user = new UserDataBaseTable
+            {
+                Username = data.Username,
+                Password = data.Password,
+                Email = data.Email,
+                LastIp = data.Ip,
+                LastLogin = data.RegisterDate,
+                Level = URole.User
+            };
+
+            using (var db = new UserContext())
+            {
+                db.Users.Add(user);
+                db.SaveChanges();
+            }
+
+            return new RequestResponseData{
+                Status = false,
+            };
+        }
+
 
         //--------------------Product
         internal ProductsDataModel ProductActionGetToList()

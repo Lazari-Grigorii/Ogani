@@ -51,6 +51,7 @@
     <Compile Include="Entities\Product\ProductsDataModel.cs" />
     <Compile Include="Entities\User\DbModel\User.cs" />
     <Compile Include="Entities\User\ULoginData.cs" />
+    <Compile Include="Entities\User\URegisterData.cs" />
     <Compile Include="Entities\User\UserDataBaseTable.cs" />
     <Compile Include="Enums\UserRoles\URole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

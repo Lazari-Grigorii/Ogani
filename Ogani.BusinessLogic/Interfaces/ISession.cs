@@ -14,5 +14,6 @@ namespace Ogani.BusinessLogic.Interfaces
     {
         RequestResponseData UserLoginAction(ULoginData data);
         UCookieData GenGookieAlgorithm(User dataUser);
+        RequestResponseData UserRegisterAction(URegisterData data);
     }
 }

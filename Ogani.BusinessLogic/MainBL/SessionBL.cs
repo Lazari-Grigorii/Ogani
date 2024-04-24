@@ -23,5 +23,10 @@ namespace Ogani.BusinessLogic.MainBL
         {
             return UCGenerationAlg(dataUser);
         }
+
+        public RequestResponseData UserRegisterAction(URegisterData data)
+        {
+            return URASessionCheck(data);
+        }
     }
 }
