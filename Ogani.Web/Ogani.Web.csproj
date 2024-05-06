@@ -276,6 +276,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DeliveyModel.cs" />
+    <Compile Include="Models\UserInfoM.cs" />
     <Compile Include="Models\RegistrationModel.cs" />
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
