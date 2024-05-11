@@ -10,10 +10,10 @@ using System.Web.Routing;
 
 namespace Ogani.Web.Attributes
 {
-    public class AuthenticationStatus : ActionFilterAttribute
+    public class AuthorizedMod : ActionFilterAttribute
     {
         private readonly ISession _session;
-        public AuthenticationStatus()
+        public AuthorizedMod()
         {
             var bl = new BusinessLogic.BusinessLogic();
             _session = bl.GetSessionBL();
@@ -24,12 +24,19 @@ namespace Ogani.Web.Attributes
             if (apiCookie != null)
             {
                 var user = _session.GetUserByCookie(apiCookie.Value);
-                if (user != null)
+                if (user != null && (user.Level == Domain.Enum.URole.USER || user.Level == Domain.Enum.URole.ADMINISTRATOR))
                 {
                     HttpContext.Current.SetMySessionObject(user);
-                    filterContext.Controller.TempData["AuthenticatedUser"] = user;
-                    base.OnActionExecuting(filterContext);
+                    filterContext.Controller.ViewBag.AuthorizedUser = user;
                 }
+                else
+                {
+                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Login", action = "Index" }));
+                }
+            }
+            else
+            {
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Login", action = "Index" }));
             }
         }
     }
