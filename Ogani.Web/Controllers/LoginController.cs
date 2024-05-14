@@ -129,7 +129,11 @@ namespace Ogani.Web.Controllers
                 {
                     HttpCookie cookie = _session.GenerateCookies(model.Username);
                     ControllerContext.HttpContext.Response.Cookies.Add(cookie);
-                    UpdateSessionStatus();
+                    UpdateSessionStatus(); // Добавил вызов функции для обновления статуса сессии
+
+                    // Устанавливаем имя пользователя в ViewBag
+                    ViewBag.UserName = model.Username;
+
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -140,6 +144,7 @@ namespace Ogani.Web.Controllers
             }
             return RedirectToAction("Login", "Login");
         }
+
 
         [HttpPost]
         public ActionResult RegistrationAction(RegistrationModel model)

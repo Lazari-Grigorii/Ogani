@@ -1,5 +1,8 @@
 ﻿$(function () {
 	$(".btn").click(function () {
+		var username = $("input[name='username']").val();
+		$(".welcome").text("Welcome, " + username);
+		document.querySelector('.welcome').textContent = document.querySelector('input[name="username"]').value;
 		$(".reg_form-signin").toggleClass("reg_form-signin-left");
 		$(".reg_form-signup").toggleClass("reg_form-signup-left");
 		$(".reg_frame").toggleClass("reg_frame-long");
