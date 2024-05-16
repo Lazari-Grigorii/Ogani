@@ -9,7 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Ogani.Controllers
+namespace Ogani.Web.Controllers
 {
     public class PrivateAccountController : BaseController
     {
