@@ -273,9 +273,12 @@
     <Compile Include="Controllers\PrivateAccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Entities\Product\DBModel\Product.cs" />
+    <Compile Include="Entities\Product\ProductDataModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Authentification.cs" />
     <Compile Include="Models\DeliveyModel.cs" />
     <Compile Include="Models\UserInfoM.cs" />
     <Compile Include="Models\RegistrationModel.cs" />

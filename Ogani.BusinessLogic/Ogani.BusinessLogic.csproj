@@ -45,7 +45,9 @@
     <Compile Include="Core\Levels\AdminApi.cs" />
     <Compile Include="Core\Levels\GuestApi.cs" />
     <Compile Include="Core\Levels\UserAPI.cs" />
+    <Compile Include="Interfaces\IProduct.cs" />
     <Compile Include="Interfaces\ISession.cs" />
+    <Compile Include="MainBL\ProductBL.cs" />
     <Compile Include="MainBL\SessionBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

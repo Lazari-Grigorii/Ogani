@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ogani.Web.Entities.Product;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,11 +17,12 @@ namespace Ogani.Web.Controllers
             _product = bl.GetProduct();
         }
 
-
         // GET: Product
         public ActionResult Index()
         {       
-            
-            
+
+            ProductDataModel products = _product.GetProductsToList();
+
+
             return View();
                }
