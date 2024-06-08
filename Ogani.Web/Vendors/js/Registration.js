@@ -1,32 +1,32 @@
 ﻿$(function () {
 	$(".btn").click(function () {
-		$(".form-signin").toggleClass("form-signin-left");
-		$(".form-signup").toggleClass("form-signup-left");
-		$(".frame").toggleClass("frame-long");
-		$(".signup-inactive").toggleClass("signup-active");
-		$(".signin-active").toggleClass("signin-inactive");
-		$(".forgot").toggleClass("forgot-left");
-		$(this).removeClass("idle").addClass("active");
+		$(".reg_form-signin").toggleClass("reg_form-signin-left");
+		$(".reg_form-signup").toggleClass("reg_form-signup-left");
+		$(".reg_frame").toggleClass("reg_frame-long");
+		$(".reg_signup-inactive").toggleClass("reg_signup-active");
+		$(".reg_signin-active").toggleClass("reg_signin-inactive");
+		$(".reg_forgot").toggleClass("reg_forgot-left");
+		$(this).removeClass("reg_idle").addClass("reg_active");
 	});
 });
 
 $(function () {
 	$(".btn-signup").click(function () {
-		$(".nav").toggleClass("nav-up");
-		$(".form-signup-left").toggleClass("form-signup-down");
-		$(".success").toggleClass("success-left");
-		$(".frame").toggleClass("frame-short");
+		$(".reg_nav").toggleClass("reg_nav-up");
+		$(".reg_form-signup-left").toggleClass("reg_form-signup-down");
+		$(".reg_success").toggleClass("reg_success-left");
+		$(".reg_frame").toggleClass("reg_frame-short");
 	});
 });
 
 $(function () {
 	$(".btn-signin").click(function () {
 		$(".btn-animate").toggleClass("btn-animate-grow");
-		$(".welcome").toggleClass("welcome-left");
-		$(".cover-photo").toggleClass("cover-photo-down");
-		$(".frame").toggleClass("frame-short");
-		$(".profile-photo").toggleClass("profile-photo-down");
-		$(".btn-goback").toggleClass("btn-goback-up");
-		$(".forgot").toggleClass("forgot-fade");
+		$(".reg_welcome").toggleClass("reg_welcome-left");
+		$(".reg_cover-photo").toggleClass("reg_cover-photo-down");
+		$(".reg_frame").toggleClass("reg_frame-short");
+		$(".reg_profile-photo").toggleClass("reg_profile-photo-down");
+		$(".reg_btn-goback").toggleClass("reg_btn-goback-up");
+		$(".reg_forgot").toggleClass("reg_forgot-fade");
 	});
 });

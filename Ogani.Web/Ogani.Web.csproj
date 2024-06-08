@@ -349,7 +349,6 @@
     <Content Include="Views\Home\Blog_Details.cshtml" />
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Shared\Registration.cshtml" />
     <Content Include="Views\Home\Reg_page.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
