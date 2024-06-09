@@ -7,7 +7,7 @@ using Ogani.Web.Models;
 
 namespace Ogani.Web.Controllers
 {
-    public class LoginController : BaseController
+    public class LoginController : Controller
     {
         private readonly ISession _session;
 
